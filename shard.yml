@@ -1,0 +1,13 @@
+name: envpp
+version: 0.1.0
+
+authors:
+  - Walter Kaunda <walterkaunda@gmail.com>
+
+targets:
+  envpp:
+    main: src/envpp.cr
+
+crystal: 1.5.1
+
+license: MIT
