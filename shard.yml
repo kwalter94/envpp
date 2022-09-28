@@ -11,3 +11,8 @@ targets:
 crystal: 1.5.1
 
 license: MIT
+
+dependencies:
+  dotenv:
+    github: drum445/dotenv
+

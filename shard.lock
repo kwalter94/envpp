@@ -1,0 +1,6 @@
+version: 2.0
+shards:
+  dotenv:
+    git: https://github.com/drum445/dotenv.git
+    version: 0.4.0
+
