@@ -1,19 +1,9 @@
 require "../spec_helper"
 require "../../src/envpp/env_translator"
 
-class EnvTableDouble < Envpp::EnvTable
-  def has_key?(name : String)
-    !fetch(name).nil?
-  end
-
-  def fetch(name : String, default : String? = nil)
-    @@env_vars ||= { "foo" => "bar", "bar" => "foo" }
-    @@env_vars.try { |vars| vars.fetch(name, default) }
-  end
-end
-
 def create_translator
-  Envpp::EnvTranslator.new(EnvTableDouble.new)
+  env_table = Envpp::EnvTable.new({ "foo" => "bar", "bar" => "foo" })
+  Envpp::EnvTranslator.new(env_table)
 end
 
 describe Envpp::EnvTranslator do

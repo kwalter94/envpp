@@ -2,12 +2,16 @@ module Envpp
   class TranslationError < Exception; end
 
   class EnvTable
+    def initialize(source : ENV.class | Hash(String, String))
+      @source = source
+    end
+
     def has_key?(name : String)
-      ENV.has_key?(name)
+      @source.has_key?(name)
     end
 
     def fetch(name : String, default : String?)
-      ENV.fetch(name, default)
+      @source.fetch(name, default)
     end
   end
 
@@ -29,8 +33,7 @@ module Envpp
       end
     end
 
-    def initialize(env_table : EnvTable? = nil)
-      @env_table = env_table || EnvTable.new
+    def initialize(@env_table : EnvTable)
       @symbol_table = {} of String => String
       @line_buffer = String::Builder.new
       @line_number = 0
