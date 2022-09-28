@@ -4,9 +4,12 @@ Replaces all environment variable references in a text file with their correspon
 values in currently set environment variables.
 
 ```sh
-$ echo 'foo: $(bar)' >> config.yaml
-$ bar="bar" cat config.yaml | envpp
-foo: bar
+$ echo 'foo: $(bar)' > config.yaml
+$ cat config.yaml
+foo: $(bar)
+
+$ bar="foobar" envpp < config.yaml
+foo: foobar
 ```
 
 The sole reason this exists is to allow me to easily work with configuration
@@ -43,21 +46,41 @@ Grab an x86-64 binary from the releases page or clone this project
 and build it yourself.
 
 ```sh
-crystal build --release src/envpp --release src/envpp
+$ shards install
+$ crystal build --release src/envpp --release src/envpp
 ```
 
 ## Usage
 
 ```sh
+# Replaces variables in source file using existing .env file
 $ envpp < source-file > output-file
+
+# Replaces variables using specified .env file
+$ envpp --dotenv-file=/path/to/.env < source-file > output-file
+
+# Replaces variables using system environment variables
+$ envpp --use-system-env < source-file > output-file
 ```
 
 ## Development
 
-Make your changes then run tests...
+Install dependencies:
+
+```sh
+$ shards install
+```
+
+Make your changes then run tests:
 
 ```sh
 $ crystal spec
+```
+
+Build application:
+
+```sh
+$ crystal build src/envpp.cr
 ```
 
 ## Contributing
