@@ -99,7 +99,6 @@ module Envpp
           return :parsing_variable
         end
 
-
         unless /\w/i.matches?(character.to_s)
           raise TranslationError.new("Invalid variable at #{@line_number}:#{@character_number}")
         end
@@ -114,7 +113,7 @@ module Envpp
         @line_buffer << fetch_variable_value(@variable.name.to_s, @variable.default.to_s)
         @variable.reset!
         return :echoing_text
-      when /[A-Z0-9_]/i
+      when /[A-Z0-9_\-]/i
         @variable.name << character.to_s
         return :parsing_variable
       else
