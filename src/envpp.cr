@@ -38,6 +38,5 @@ module Envpp
 
   STDIN.each_line do |line|
     puts translator.translate_line(line)
-    puts "\n"
   end
 end
