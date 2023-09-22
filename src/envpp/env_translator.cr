@@ -63,7 +63,9 @@ module Envpp
         end
       end
 
-      if state == :parsing_variable || state == :parsing_default
+      if state == :escaping_text
+        @line_buffer << "\\"
+      elsif state == :parsing_variable || state == :parsing_default
         raise TranslationError.new("Invalid variable at #{@line_number}:#{@character_number}")
       end
 

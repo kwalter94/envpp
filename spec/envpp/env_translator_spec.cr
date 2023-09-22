@@ -45,5 +45,11 @@ describe Envpp::EnvTranslator do
       expect_raises(Envpp::TranslationError) { translator.translate_line("${foo)") }
       expect_raises(Envpp::TranslationError) { translator.translate_line("${-1foo}") }
     end
+
+    it "does not eat up trailing \\s" do
+      translator = create_translator
+      line = translator.translate_line("Foobar \\")
+      line.should eq("Foobar \\")
+    end
   end
 end
